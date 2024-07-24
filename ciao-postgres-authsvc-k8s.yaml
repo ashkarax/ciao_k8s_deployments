@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: postgres-authsvc-deployment
+  namespace: ciao
+  labels:
+    app: authsvc-db
+    env: production
+    project: ciao-socialmedia
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authsvc-db
+  template:
+    metadata:
+      name: postgres-authsvc-pod
+      labels:
+        app: authsvc-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:14
+          ports:
+            containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: "ciao_auth_svc"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: authsvc-db-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+    name: postgres-authsvc-service
+    namespace: ciao
+    labels:
+      app: authsvc-db
+      env: production
+      project: ciao-socialmedia
+spec:
+  type: ClusterIP
+  selector:
+    app: authsvc-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+
+      

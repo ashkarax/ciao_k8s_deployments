@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: authsvc-deployment
+  namespace: ciao
+  labels:
+    app: authsvc
+    env: production
+    project: ciao-socialmedia
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authsvc
+  template:
+    metadata:
+      name: authsvc-pod
+      labels:
+        app: authsvc
+    spec:
+      containers:
+        - name: auth-service
+          image: ashkarax/ciao_authsvc:latest
+          ports:
+            - containerPort: 50051
+          env:
+            - name: DBHOST
+              value: "authsvc-db"
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: authsvc-service
+  namespace: ciao
+  labels:
+    app: authsvc
+    env: production
+    project: ciao-socialmedia
+
+spec:
+  type: ClusterIP
+  selector:
+    app: authsvc
+  ports:
+    - port: 50051
+      targetPort: 50051
+  
