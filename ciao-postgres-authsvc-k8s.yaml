@@ -24,7 +24,7 @@ spec:
         - name: postgres
           image: postgres:14
           ports:
-            containerPort: 5432
+            - containerPort: 5432
           env:
             - name: POSTGRES_DB
               value: "ciao_auth_svc"
