@@ -30,7 +30,7 @@ spec:
           image: confluentinc/cp-kafka:7.0.1
           ports:
             - containerPort: 29092
-            - containerPort: 29092
+            - containerPort: 9092
           env:
             - name: KAFKA_ADVERTISED_LISTENERS
               value: "INTERNAL://:29092,LISTENER_EXTERNAL://:9092"
