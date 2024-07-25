@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       name: postgres-postnrelsvc-pod
-      label
+      labels:
         app: postnrelsvc-db
     spec:
       containers:
