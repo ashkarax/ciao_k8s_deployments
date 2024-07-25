@@ -35,12 +35,13 @@ spec:
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
-              subPath: postgres
+              subPath: postgres-authsvc-subpath
   volumeClaimTemplates:
     - metadata:
-        name: storagespace
+        name: postgres-storage
       spec:
         accessModes: ["ReadWriteOnce"]
+        storageClassName: my-storage-class
         resources:
           requests:
             storage: 100Mi
