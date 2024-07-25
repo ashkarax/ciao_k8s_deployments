@@ -58,7 +58,7 @@ spec:
         storageClassName: my-storage-class
         resources:
           requests:
-          storage: 100Mi
+            storage: 100Mi
 
 ---
 
