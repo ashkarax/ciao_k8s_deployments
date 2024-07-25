@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 
 metadata:
-  name: postnrelsvc-db
+  name: postgres-postnrelsvc-deployment
   namespace: ciao
   labels:
     app: postnrelsvc-db
@@ -17,14 +17,14 @@ spec:
   template:
     metadata:
       name: postgres-postnrelsvc-pod
-      labels:
+      label
         app: postnrelsvc-db
     spec:
       containers:
         - name: postgres
           image: postgres:14
           ports:
-            - containerPort: 5431
+            - containerPort: 5432
           env:
             - name: POSTGRES_DB
               value: "ciao_postnrel_svc"
@@ -64,6 +64,6 @@ spec:
     app: postnrelsvc-db
   ports:
     - port: 5431
-      targetPort: 5431
+      targetPort: 5432
 
       
