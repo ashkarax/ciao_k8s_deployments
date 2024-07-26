@@ -42,6 +42,6 @@ spec:
   selector:
     app: apigateway
   ports:
-    - port: 3000
-      targetPort: 30001
+    - port: 30001
+      targetPort: 3000
           
