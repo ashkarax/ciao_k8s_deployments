@@ -28,6 +28,8 @@ spec:
           env:
             - name: MONGODB_URL
               value: "mongodb:27017"
+            - name: KAFKA_PORT
+              value: "kafka:9092"
 
 
 ---
