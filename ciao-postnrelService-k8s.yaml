@@ -30,6 +30,8 @@ spec:
               value: "postnrelsvc-db"
             - name: DBPORT
               value: "5431"
+            - name: KAFKA_PORT
+              value: "kafka:9092"
 
 ---
 apiVersion: v1
