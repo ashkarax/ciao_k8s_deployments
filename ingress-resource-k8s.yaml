@@ -3,16 +3,22 @@ kind: Ingress
 metadata:
   name: ciao-ingress
   namespace: ciao
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
 spec:
-  ingressClassName: nginx 
+  ingressClassName: "nginx"
+  tls:
+  - hosts:
+    - k8s.ciao.ashkar.tech
+    secretName: ciao-tls
   rules:
-  - host: k8s.ciao.ashkar.tech
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend: 
-          service: 
-            name: apigw-service
-            port: 
-              number: 30001
+    - host: k8s.ciao.ashkar.tech
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: apigw-service
+                port:
+                  number: 30001
