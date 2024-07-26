@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ciao-ingress
+  namespace: ciao
 spec:
   rules:
   - host: k8s.ciao.ashkar.tech
