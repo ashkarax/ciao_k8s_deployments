@@ -25,7 +25,7 @@ spec:
           image: ashkarax/ciao_apigw:latest
           ports:
             - containerPort: 3000
-            
+
 ---
 apiVersion: v1
 kind: Service
@@ -38,11 +38,10 @@ metadata:
     project: ciao-socialmedia
 
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: apigateway
   ports:
     - port: 3000
       targetPort: 3000
-      nodePort: 30001
           
