@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: notifsvc-deployment
+  namespace: ciao
+  labels:
+    app: notifsvc
+    env: production
+    project: ciao-socialmedia
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifsvc
+  template:
+    metadata:
+      name: notifsvc-pod
+      labels:
+        app: notifsvc
+    spec:
+      containers:
+        - name: notifsvc
+          image: ashkarax/ciao_notifsvc:latest
+          ports:
+            - containerPort: 50054
+          env:
+            - name: DBHOST
+              value: "notifsvc-db"
+            - name: DBPORT
+              value: "5430"
+            - name: KAFKA_PORT
+              value: "kafka:9092"
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: notifsvc-service
+  namespace: ciao
+  labels:
+    app: notifsvc
+    env: production
+    project: ciao-socialmedia
+
+spec:
+  type: ClusterIP
+  selector:
+    app: notifsvc
+  ports:
+    - port: 50054
+      targetPort: 50054
+  
