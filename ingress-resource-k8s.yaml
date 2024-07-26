@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: ciao-ingress
   namespace: ciao
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
   - host: k8s.ciao.ashkar.tech
