@@ -25,6 +25,15 @@ spec:
           image: ashkarax/ciao_apigw:latest
           ports:
             - containerPort: 3000
+          env:
+          - name: AUTH_SVC_URL
+            value: "authsvc-service:50051"
+          - name: POSTNREL_SVC_URL
+            value: "postnrelsvc-service:50052"
+          - name: CHAT_SVC_URL
+            value: "chatncallsvc-service:50053"
+          - name: NOTIF_SVC_URL
+            value: "notifsvc-service:50054"
 
 ---
 apiVersion: v1
