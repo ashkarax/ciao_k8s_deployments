@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb-deployment
+  namespace: ciao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      database: mongodb
+  template:
+    metadata:
+      name: mongodb-pod
+      labels:
+        database: mongodb
+    spec:
+      containers:
+      - name: mongodb-container
+        image: mongo
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongostorage
+          mountPath: /var/lib/mongodb/data
+          subPath: mongodb-subpath
+  volumeClaimTemplates:
+  - metadata:
+      name: mongostorage
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: my-storage-class
+      resources:
+        requests:
+          storage: 10Mi
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: ciao
+spec:
+  type: ClusterIP
+  selector:
+    database: mongodb
+  ports:
+  - port: 27017
+    targetPort: 27017
