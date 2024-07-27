@@ -32,6 +32,8 @@ spec:
               value: "5431"
             - name: KAFKA_PORT
               value: "kafka:9092"
+            - name: AUTH_SVC_URL
+              value: "authsvc-service:50051"
 
 ---
 apiVersion: v1

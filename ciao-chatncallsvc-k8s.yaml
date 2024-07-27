@@ -30,6 +30,8 @@ spec:
               value: "mongodb:27017"
             - name: KAFKA_PORT
               value: "kafka:9092"
+            - name: AUTH_SVC_URL
+              value: "authsvc-service:50051"
 
 
 ---

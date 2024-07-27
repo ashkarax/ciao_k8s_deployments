@@ -28,6 +28,8 @@ spec:
           env:
             - name: DBHOST
               value: "authsvc-db"
+            - name: POSTNREL_SVC_URL
+              value: "postnrelsvc-service:50052"
 
 ---
 apiVersion: v1
