@@ -34,6 +34,8 @@ spec:
             value: "chatncallsvc-service:50053"
           - name: NOTIF_SVC_URL
             value: "notifsvc-service:50054"
+          - name: KAFKA_PORT
+            value: "kafka:9092"
 
 ---
 apiVersion: v1
